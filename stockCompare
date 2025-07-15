@@ -1,0 +1,25 @@
+⍝ Load CSV file (adjust path if needed)
+data ← ⎕CSV 'C:\Users\spors\Downloads\Apl_Project\portfolio_returns.csv'
+
+⍝ Extract header and data rows
+header ← 1↑data
+rows ← 1↓data
+
+⍝ Extract stocks and returns
+stocks ← rows[;1]
+returns ← ⍎¨ rows[;2]
+
+⍝ Find indexes of max and min returns
+idxMax ← ⌈/ returns ⍳ returns
+idxMin ← ⌊/ returns ⍳ returns
+
+⍝ Get best and worst stock info
+bestStock ← stocks[idxMax]
+worstStock ← stocks[idxMin]
+bestReturn ← returns[idxMax]
+worstReturn ← returns[idxMin]
+
+⍝ Print portfolio summary
+⎕← ' Portfolio Summary:'
+⎕← 'Best Performer     : ', bestStock, ' (', ⍕ bestReturn, ' %)'
+⎕← 'Worst Performer    : ', worstStock, ' (', ⍕ worstReturn, ' %)'
